@@ -50,8 +50,13 @@ class StoryController extends Controller
     {
       $data['menu'] = "my_story";
       $data['user'] = Session::get('user');
-      $data['data'] = Blogs::where('id', $id)->with('users')->get();
-      return view('story.detail', $data);
+      $blog = Blogs::where('id', $id)->with('users')->get();
+      if(count($blog) < 1){
+        return abort(404);
+      }else{
+        $data['data'] = $blog;
+        return view('story.detail', $data);
+      }
     }
     public function edit($id)
     {

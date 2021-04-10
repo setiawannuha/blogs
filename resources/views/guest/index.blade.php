@@ -9,21 +9,39 @@
   <div id="newspaper_x_header_module-2" class="widget newspaper_x_widgets">
     <div class="newspaper-x-recent-posts container">
       <ul>
-        <li class="" id="newspaper-x-recent-post-0"
-          style="background-image:url('{{ asset('storage/images/blogs/'.$header1[0]->banner) }}')">
-          <div class="newspaper-x-post-info">
-            <h1>
-              <a href="">
-                {{ substr($header1[0]->title, 0, 50) }}...
-              </a>
-            </h1>
-            <span class="newspaper-x-category">
-              <a href="{{ $header1[0]->category == "0" ? "/blog" : "/news" }}">
-                {{ $header1[0]->category == "0" ? "Blog" : "News" }}
-              </a>
-            </span>
-            <span class="newspaper-x-date">{{ $header1[0]->created_at->format("H:i l, d M Y") }}</span>
-        </li>
+        @if (count($header1) < 1)
+          <li class="" id="newspaper-x-recent-post-0"
+            style="background-image:url('{{ asset('storage/images/blogs/default.jpeg') }}')">
+            <div class="newspaper-x-post-info">
+              <h1>
+                <a href="">
+                  Welcome to Woroworo
+                </a>
+              </h1>
+              <span class="newspaper-x-category">
+                <a href="#">
+                  Category
+                </a>
+              </span>
+              <span class="newspaper-x-date"></span>
+          </li>
+        @else
+          <li class="" id="newspaper-x-recent-post-0"
+            style="background-image:url('{{ asset('storage/images/blogs/'.$header1[0]->banner) }}')">
+            <div class="newspaper-x-post-info">
+              <h1>
+                <a href="">
+                  {{ substr($header1[0]->title, 0, 50) }}...
+                </a>
+              </h1>
+              <span class="newspaper-x-category">
+                <a href="{{ $header1[0]->category == "0" ? "/blog" : "/news" }}">
+                  {{ $header1[0]->category == "0" ? "Blog" : "News" }}
+                </a>
+              </span>
+              <span class="newspaper-x-date">{{ $header1[0]->created_at->format("H:i l, d M Y") }}</span>
+          </li>
+        @endif
         @foreach ($header2 as $item)
           <li class="" id="newspaper-x-recent-post-1"
             style="background-image:url('{{ asset('storage/images/blogs/'.$item->banner) }}')">
