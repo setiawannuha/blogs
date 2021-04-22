@@ -7,6 +7,7 @@ use App\Models\Blogs;
 use App\Http\Requests\BlogsRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class StoryController extends Controller
 {
@@ -14,6 +15,7 @@ class StoryController extends Controller
     {
       $user = Session::get('user');
       $data['data'] = Blogs::where('users_id', $user->id)->get();
+      // $data['data'] = DB::select("SELECT * FROM blogs WHERE users_id='$user->id'");
       $data['user'] = Session::get('user');
       $data['menu'] = "my_story";
       return view('story.index', $data);

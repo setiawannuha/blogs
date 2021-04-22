@@ -15,8 +15,9 @@ class Blogs extends Model
       'content',
       'category',
       'tags',
-      'users_id'
+      'users_id',
     ];
+    protected $dates = ['created_at', 'updated_at'];
 
     public function users(){
       return $this->belongsTo(User::class);
